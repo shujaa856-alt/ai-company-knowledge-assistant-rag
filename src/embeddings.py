@@ -1,9 +1,24 @@
 from sentence_transformers import SentenceTransformer
 
-model = SentenceTransformer('all-MiniLM-L6-v2')
+# Load the embedding model once
+model = SentenceTransformer("all-MiniLM-L6-v2")
 
-sentence = "Employees get 20 vacation days every year."
 
-embedding = model.encode(sentence)
+def create_embeddings(chunks):
+    """
+    Generate embeddings for document chunks.
 
-print("Embedding Length:", len(embedding))
+    Args:
+        chunks (List[Document]):
+            Chunked LangChain Document objects.
+
+    Returns:
+        List[List[float]]:
+            A list of embedding vectors.
+    """
+
+    chunk_texts = [chunk.page_content for chunk in chunks]
+
+    embeddings = model.encode(chunk_texts)
+
+    return embeddings.tolist()

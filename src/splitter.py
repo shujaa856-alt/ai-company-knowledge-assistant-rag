@@ -1,26 +1,24 @@
-from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-loader =PyPDFDirectoryLoader("documents")
 
-documents = loader.load()
+def split_documents(documents):
+    """
+    Split documents into smaller chunks.
 
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,
-    chunk_overlap=200
-)
+    Args:
+        documents (List[Document]):
+            Documents returned by load_documents().
 
-chunks = text_splitter.split_documents(documents)
+    Returns:
+        List[Document]:
+            Chunked LangChain Document objects.
+    """
 
-print(f"Original Documents: {len(documents)}")
-print(f"Total Chunks: {len(chunks)}")
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1000,
+        chunk_overlap=200
+    )
 
-print("\n========== FIRST CHUNK ==========\n")
+    chunks = text_splitter.split_documents(documents)
 
-print("Chunk Content:\n")
-print(chunks[0].page_content)
-
-print("\n-----------------------------")
-
-print("Metadata:\n")
-print(chunks[0].metadata)
+    return chunks

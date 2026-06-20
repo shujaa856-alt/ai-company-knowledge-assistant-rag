@@ -1,22 +1,15 @@
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 
-loader = PyPDFDirectoryLoader("data/documents")
 
-documents = loader.load()
+def load_documents():
+    """
+    Load all PDF documents from the data/documents directory.
 
-print(f"Loaded {len(documents)} documents.")
+    Returns:
+        List[Document]: A list of LangChain Document objects.
+    """
+    loader = PyPDFDirectoryLoader("data/documents")
 
-print("\nFirst Document:\n")
+    documents = loader.load()
 
-print("Source:")
-print(documents[0].metadata["source"])
-
-print("\nPage:")
-print(documents[0].metadata["page"])
-
-print("\nTotal Pages:")
-print(documents[0].metadata["total_pages"])
-
-print("\nContent:")
-print(documents[0].page_content)
-
+    return documents
