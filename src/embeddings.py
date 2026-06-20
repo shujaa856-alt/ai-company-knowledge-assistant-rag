@@ -1,7 +1,7 @@
 from sentence_transformers import SentenceTransformer
 
 # Load the embedding model once
-model = SentenceTransformer("all-MiniLM-L6-v2")
+embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 
 def create_embeddings(chunks):
@@ -19,6 +19,6 @@ def create_embeddings(chunks):
 
     chunk_texts = [chunk.page_content for chunk in chunks]
 
-    embeddings = model.encode(chunk_texts)
+    embeddings = embedding_model.encode(chunk_texts)
 
     return embeddings.tolist()
