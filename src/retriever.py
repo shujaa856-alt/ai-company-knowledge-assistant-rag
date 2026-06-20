@@ -9,6 +9,7 @@ collection = client.get_collection("company_documents")
 
 
 def retrieve(query, n_results=3):
+
     query_embedding = embedding_model.encode(query).tolist()
 
     results = collection.query(
@@ -16,19 +17,24 @@ def retrieve(query, n_results=3):
         n_results=n_results
     )
 
-    return results
+    retrieved_chunks = []
+
+    for i in range(len(results["ids"][0])):
+
+        chunk = {
+            "id": results["ids"][0][i],
+            "document": results["documents"][0][i],
+            "metadata": results["metadatas"][0][i],
+            "distance": results["distances"][0][i]
+        }
+
+        retrieved_chunks.append(chunk)
+
+    return retrieved_chunks
 
 if __name__ == "__main__":
     results = retrieve("What is the leave policy?")
 
-    print("Documents:")
-print(results["documents"])
-
-print("\nMetadata:")
-print(results["metadatas"])
-
-print("\nDistances:")
-print(results["distances"])
-
-print("\nIDs:")
-print(results["ids"])
+    for chunk in results:
+        print(chunk)
+        print("-" * 80)
