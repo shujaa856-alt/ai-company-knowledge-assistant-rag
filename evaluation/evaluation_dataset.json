@@ -1,0 +1,32 @@
+[
+    {
+        "question": "What is the leave policy?",
+        "expected_chunks": [
+            "chunk_2"
+        ]
+    },
+    {
+        "question": "How many earned leaves do employess receive?",
+        "expected_chunks": [
+            "chunk_2"
+        ]
+    },
+    {
+        "question": "What is the internet reimbursement amount?",
+        "expected_chunks": [
+            "chunk_3"
+        ]
+    },
+    {
+        "question": "What is the hotel reimbursement limit?",
+        "expected_chunks": [
+            "chunk_3"
+        ]
+    },
+    {
+        "question": "What are the company pricing plans?",
+        "expected_chunks": [
+            "chunk_8"
+        ]
+    }
+]
